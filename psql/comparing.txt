@@ -1,0 +1,290 @@
+login as: stef
+stef@oel65's password:
+Last login: Thu Aug 13 08:32:16 2015 from 192.168.56.1
+[stef@oel65 ~]$ psql -U trxnuser -W trxndb -h oel65
+Password for user trxnuser:
+psql (9.3.9)
+Type "help" for help.
+
+trxndb=> select count(*) from transdet;
+ count
+-------
+ 22007
+(1 row)
+
+trxndb=> select sum(tran_amount) from transdet;
+    sum
+------------
+ 2652682.92
+(1 row)
+
+trxndb=> select sum(tran_id),sum(tran_amount),sum(cr_dr),sum(account_id),sum(trantypeid),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+ERROR:  column "trantypeid" does not exist
+LINE 1: ...),sum(tran_amount),sum(cr_dr),sum(account_id),sum(trantypeid...
+                                                             ^
+trxndb=> select sum(tran_id),sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+    sum    |    sum     |  sum   |  sum   |  sum   |   sum    |   sum    | sum  | sum  | sum  |   sum    |   sum   | sum | count
+-----------+------------+--------+--------+--------+----------+----------+------+------+------+----------+---------+-----+-------
+ 670098633 | 2652682.92 | -20131 | 266130 | 694784 | 32718520 | 32718520 | 9034 | 4439 | 5949 | 29214228 | 5742273 |   6 | 22007
+(1 row)
+
+trxndb=> select sum(tran_id),sum(to_char(tran_date,'yyyymmdd')),sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+ERROR:  function sum(text) does not exist
+LINE 1: select sum(tran_id),sum(to_char(tran_date,'yyyymmdd')),sum(t...
+                            ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+trxndb=> select to_char(tran_date,'yyyymmdd') from transdet limit 5;
+ to_char
+----------
+ 20121112
+ 20121021
+ 20121021
+ 20121102
+ 20121027
+(5 rows)
+
+trxndb=> select sum(to_char(tran_date,'yyyymmdd')) from transdet limit 5;
+ERROR:  function sum(text) does not exist
+LINE 1: select sum(to_char(tran_date,'yyyymmdd')) from transdet limi...
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+trxndb=> select to_number(to_char(tran_date,'yyyymmdd')) from transdet limit 5;
+ERROR:  function to_number(text) does not exist
+LINE 1: select to_number(to_char(tran_date,'yyyymmdd')) from transde...
+               ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+trxndb=> select to_number(to_char(tran_date,'yyyymmdd'),'999999999') from transdet limit 5;
+ to_number
+-----------
+  20121112
+  20121021
+  20121021
+  20121102
+  20121027
+(5 rows)
+
+trxndb=> select sum(tran_id),to_number(to_char(tran_date,'yyyymmdd'),'999999999'),sum(cr_dr),sum(account_id),sum(trantypeid),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+ERROR:  column "trantypeid" does not exist
+LINE 1: ...mdd'),'999999999'),sum(cr_dr),sum(account_id),sum(trantypeid...
+                                                             ^
+trxndb=> select sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')) from transdet limit 5;
+     sum
+--------------
+ 439990259620
+(1 row)
+
+trxndb=> select sum(tran_id),sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')),sum(to_char(tran_date,'yyyymmdd')),sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+ERROR:  function sum(text) does not exist
+LINE 1: ...umber(to_char(tran_date,'yyyymmdd'),'999999999')),sum(to_cha...
+                                                             ^
+HINT:  No function matches the given name and argument types. You might need to add explicit type casts.
+trxndb=> select sum(tran_id),sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')),,sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+ERROR:  syntax error at or near ","
+LINE 1: ...umber(to_char(tran_date,'yyyymmdd'),'999999999')),,sum(tran_...
+                                                             ^
+trxndb=> select sum(tran_id),sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')),sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+    sum    |     sum      |    sum     |  sum   |  sum   |  sum   |   sum    |   sum    | sum  | sum  | sum  |   sum    |   sum   | sum | count
+-----------+--------------+------------+--------+--------+--------+----------+----------+------+------+------+----------+---------+-----+-------
+ 670098633 | 439990259620 | 2652682.92 | -20131 | 266130 | 694784 | 32718520 | 32718520 | 9034 | 4439 | 5949 | 29214228 | 5742273 |   6 | 22007
+(1 row)
+
+trxndb=>
+
+
+
+
+
+
+[stef@oel65 psql]$ python mgrt3.py
+[stef@oel65 psql]$ mysql -u stef  -p mydb
+Enter password:
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 63
+Server version: 5.6.26 MySQL Community Server (GPL)
+
+Copyright (c) 2000, 2015, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+mysql> select count(*) from transdet;
++----------+
+| count(*) |
++----------+
+|    22007 |
++----------+
+1 row in set (0.02 sec)
+
+mysql> select sum(tran_amount) from transdet;
++-------------------+
+| sum(tran_amount)  |
++-------------------+
+| 2652682.917349998 |
++-------------------+
+1 row in set (0.02 sec)
+
+mysql> desc tran_amount
+    -> ;
+ERROR 1146 (42S02): Table 'mydb.tran_amount' doesn't exist
+mysql> desc transdet;
++----------------+--------------+------+-----+---------------------+----------------+
+| Field          | Type         | Null | Key | Default             | Extra          |
++----------------+--------------+------+-----+---------------------+----------------+
+| id             | mediumint(9) | NO   | PRI | NULL                | auto_increment |
+| tran_id        | mediumint(9) | YES  |     | NULL                |                |
+| tran_date      | date         | YES  |     | NULL                |                |
+| tran_creditor  | varchar(100) | YES  |     | NULL                |                |
+| tran_desc      | varchar(100) | YES  |     | NULL                |                |
+| tran_amount    | float        | YES  |     | NULL                |                |
+| cr_dr          | tinyint(4)   | YES  |     | NULL                |                |
+| trantypeid     | smallint(6)  | YES  |     | NULL                |                |
+| account_id     | smallint(6)  | YES  |     | NULL                |                |
+| statement_date | date         | YES  |     | NULL                |                |
+| cheque_no      | mediumint(9) | YES  |     | NULL                |                |
+| receipt_ind    | tinyint(4)   | NO   |     | 0                   |                |
+| dd_ind         | tinyint(4)   | NO   |     | 0                   |                |
+| date_created   | timestamp    | NO   |     | CURRENT_TIMESTAMP   |                |
+| user_created   | varchar(100) | YES  |     | not supplied        |                |
+| date_amended   | timestamp    | NO   |     | 0000-00-00 00:00:00 |                |
+| user_amended   | varchar(100) | YES  |     | NULL                |                |
+| frequency      | smallint(6)  | YES  |     | NULL                |                |
+| cred_id        | smallint(6)  | YES  |     | NULL                |                |
+| branch_id      | smallint(6)  | YES  |     | NULL                |                |
+| cost_code      | smallint(6)  | YES  |     | NULL                |                |
++----------------+--------------+------+-----+---------------------+----------------+
+21 rows in set (0.00 sec)
+
+mysql> alter table transdet modify tran_amount float(9,2);
+Query OK, 0 rows affected (0.01 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select sum(tran_amount) from transdet;
++------------------+
+| sum(tran_amount) |
++------------------+
+|       2652682.92 |
++------------------+
+1 row in set (0.03 sec)
+
+mysql> select sum(tran_id),sum(tran_amount),sum(cr_dr),sum(account_id),sum(trantypeid),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
++--------------+------------------+------------+-----------------+-----------------+----------------+----------------+------------------+-------------+----------------+--------------+----------------+----------------+----------+
+| sum(tran_id) | sum(tran_amount) | sum(cr_dr) | sum(account_id) | sum(trantypeid) | sum(cheque_no) | sum(cheque_no) | sum(receipt_ind) | sum(dd_ind) | sum(frequency) | sum(cred_id) | sum(branch_id) | sum(cost_code) | count(*) |
++--------------+------------------+------------+-----------------+-----------------+----------------+----------------+------------------+-------------+----------------+--------------+----------------+----------------+----------+
+|    670098633 |       2652682.92 |     -20131 |          266130 |          694784 |       32718520 |       32718520 |             9034 |        4439 |           5949 |     29214228 |        5742273 |              6 |    22007 |
++--------------+------------------+------------+-----------------+-----------------+----------------+----------------+------------------+-------------+----------------+--------------+----------------+----------------+----------+
+1 row in set (0.06 sec)
+
+mysql> select sum(tran_id),sum(tran_amount),sum(cr_dr),sum(account_id),sum(trantypeid),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;/q
++--------------+------------------+------------+-----------------+-----------------+----------------+----------------+------------------+-------------+----------------+--------------+----------------+----------------+----------+
+| sum(tran_id) | sum(tran_amount) | sum(cr_dr) | sum(account_id) | sum(trantypeid) | sum(cheque_no) | sum(cheque_no) | sum(receipt_ind) | sum(dd_ind) | sum(frequency) | sum(cred_id) | sum(branch_id) | sum(cost_code) | count(*) |
++--------------+------------------+------------+-----------------+-----------------+----------------+----------------+------------------+-------------+----------------+--------------+----------------+----------------+----------+
+|    670098633 |       2652682.92 |     -20131 |          266130 |          694784 |       32718520 |       32718520 |             9034 |        4439 |           5949 |     29214228 |        5742273 |              6 |    22007 |
++--------------+------------------+------------+-----------------+-----------------+----------------+----------------+------------------+-------------+----------------+--------------+----------------+----------------+----------+
+1 row in set (0.06 sec)
+
+    -> ;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '/q' at line 1
+mysql> select sum(tran_id),sum(tran_amount),sumselect sum(tran_id),sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')),sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;(cr_dr),sum(acco                                                                                                                           d),sum(cost_code), count(*) from transdet;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'sum(tran_id),sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')),sum(tran_' at line 1
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'cr_dr),sum(account_id),sum(trantypeid),sum(cheque_no),sum(cheque_no),sum(receipt' at line 1
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> select sum(tran_id),sum(to_number(to_char(tran_date,'yyyymmdd'),'999999999')),sum(tran_amount),sum(cr_dr),sum(account_id),sum(tran_type_id),sum(cheque_no),sum(cheque_no),sum(receipt_ind),sum(dd_ind),sum(frequency),sum(cred_id),sum(branch_id),sum(cost_code), count(*) from transdet;
+ERROR 1305 (42000): FUNCTION mydb.to_number does not exist
+mysql>
+mysql>
+mysql>
+mysql> select tran_date,cast(tran_date as unsigned) from transdet limit 5;
++------------+-----------------------------+
+| tran_date  | cast(tran_date as unsigned) |
++------------+-----------------------------+
+| 2004-07-01 |                    20040701 |
+| 2004-07-04 |                    20040704 |
+| 1998-01-09 |                    19980109 |
+| 1998-03-10 |                    19980310 |
+| 1998-03-30 |                    19980330 |
++------------+-----------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select tran_date,cast(tran_date as unsigned),date_created,cast(date_created as unsigned) from transdet limit 5;
++------------+-----------------------------+---------------------+--------------------------------+
+| tran_date  | cast(tran_date as unsigned) | date_created        | cast(date_created as unsigned) |
++------------+-----------------------------+---------------------+--------------------------------+
+| 2004-07-01 |                    20040701 | 2004-07-04 00:00:00 |                 20040704000000 |
+| 2004-07-04 |                    20040704 | 2004-07-04 00:00:00 |                 20040704000000 |
+| 1998-01-09 |                    19980109 | 2000-01-01 00:00:00 |                 20000101000000 |
+| 1998-03-10 |                    19980310 | 2000-01-01 00:00:00 |                 20000101000000 |
+| 1998-03-30 |                    19980330 | 2000-01-01 00:00:00 |                 20000101000000 |
++------------+-----------------------------+---------------------+--------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> select tran_date,cast(tran_date as unsigned),date_amended,cast(date_amended as unsigned) from transdet where date_amended is not null limit 5;
++------------+-----------------------------+---------------------+--------------------------------+
+| tran_date  | cast(tran_date as unsigned) | date_amended        | cast(date_amended as unsigned) |
++------------+-----------------------------+---------------------+--------------------------------+
+| 2004-07-01 |                    20040701 | 2012-11-13 08:31:21 |                 20121113083121 |
+| 2004-07-04 |                    20040704 | 2012-11-13 08:31:21 |                 20121113083121 |
+| 1998-01-09 |                    19980109 | 2012-11-13 08:31:21 |                 20121113083121 |
+| 1998-03-10 |                    19980310 | 2012-11-13 08:31:21 |                 20121113083121 |
+| 1998-03-30 |                    19980330 | 2012-11-13 08:31:21 |                 20121113083121 |
++------------+-----------------------------+---------------------+--------------------------------+
+5 rows in set (0.00 sec)
+
+mysql> desc transdet;
++----------------+--------------+------+-----+---------------------+----------------+
+| Field          | Type         | Null | Key | Default             | Extra          |
++----------------+--------------+------+-----+---------------------+----------------+
+| id             | mediumint(9) | NO   | PRI | NULL                | auto_increment |
+| tran_id        | mediumint(9) | YES  |     | NULL                |                |
+| tran_date      | date         | YES  |     | NULL                |                |
+| tran_creditor  | varchar(100) | YES  |     | NULL                |                |
+| tran_desc      | varchar(100) | YES  |     | NULL                |                |
+| tran_amount    | float(9,2)   | YES  |     | NULL                |                |
+| cr_dr          | tinyint(4)   | YES  |     | NULL                |                |
+| trantypeid     | smallint(6)  | YES  |     | NULL                |                |
+| account_id     | smallint(6)  | YES  |     | NULL                |                |
+| statement_date | date         | YES  |     | NULL                |                |
+| cheque_no      | mediumint(9) | YES  |     | NULL                |                |
+| receipt_ind    | tinyint(4)   | NO   |     | 0                   |                |
+| dd_ind         | tinyint(4)   | NO   |     | 0                   |                |
+| date_created   | timestamp    | NO   |     | CURRENT_TIMESTAMP   |                |
+| user_created   | varchar(100) | YES  |     | not supplied        |                |
+| date_amended   | timestamp    | NO   |     | 0000-00-00 00:00:00 |                |
+| user_amended   | varchar(100) | YES  |     | NULL                |                |
+| frequency      | smallint(6)  | YES  |     | NULL                |                |
+| cred_id        | smallint(6)  | YES  |     | NULL                |                |
+| branch_id      | smallint(6)  | YES  |     | NULL                |                |
+| cost_code      | smallint(6)  | YES  |     | NULL                |                |
++----------------+--------------+------+-----+---------------------+----------------+
+21 rows in set (0.00 sec)
+
+mysql>
+mysql>
+mysql>
+mysql>
