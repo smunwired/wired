@@ -4,7 +4,12 @@ conn = psycopg2.connect("host='192.168.1.103' dbname='photolib' user='stef' pass
 cursor = conn.cursor()
 print("Connected!\n")
 rootdir = '/media/stef/My Passport/everything/sandisk64_20191008'
+rootdir = '/media/stef/My Passport/everything/ccnopic'
+rootdir = '/media/stef/My Passport/everything/master_DUP'
+rootdir = '/media/stef/My Passport/Pictures3'
 source = 'red_everything_sandisk'
+source = 'red_everything_master_dup'
+source = 'red_pictures3'
 for dirName,subdirList, fileList in os.walk(rootdir):
 #	print('Found directory: %s' % dirName)
    for fname in fileList:
