@@ -5,7 +5,7 @@ import MySQLdb as mdb
 import time
 from datetime import datetime, timedelta
 
-con = mdb.connect('192.168.0.70', 'stef', 'pass', 'mydb')
+con = mdb.connect('192.168.1.216', 'stef', 'pass', 'mydb')
 p0 = raw_input("enter mod, del or defaults to new : ") or "new"
 p1 = raw_input("enter date, y for yesterday, defaults to today : ") or time.strftime("%Y-%m-%d")
 p2 = raw_input("enter time : ")
