@@ -1,26 +1,53 @@
+#!/usr/bin/python
+
+import sys, getopt
 import os
 import psycopg2
-conn = psycopg2.connect("host='192.168.1.103' dbname='photolib' user='stef' password='pass'")
-cursor = conn.cursor()
-print("Connected!\n")
-rootdir = '/media/stef/My Passport/everything/sandisk64_20191008'
-rootdir = '/media/stef/My Passport/everything/ccnopic'
-rootdir = '/media/stef/My Passport/everything/master_DUP'
-rootdir = '/media/stef/My Passport/Pictures3'
-source = 'red_everything_sandisk'
-source = 'red_everything_master_dup'
-source = 'red_pictures3'
-for dirName,subdirList, fileList in os.walk(rootdir):
-#	print('Found directory: %s' % dirName)
-   for fname in fileList:
-#		print('\t%s' % fname)  
-      path=os.path.join(dirName, fname)
-      if os.path.islink(path):
-         print('skipping path ' + path)
-         continue
-      statinfo = os.stat(dirName + '/' + fname)
-      query = "insert into photo(src,dr,nm,url,sz) values (%s, %s, %s, %s, %s);"
-      data = (source, dirName, fname, dirName + '/' + fname, statinfo.st_size)
-      cursor.execute(query, data)
-      conn.commit()
+from datetime import date
 
+def main(argv):
+   rootdir = ''
+   table = ''
+   partition = ''
+   try:
+       opts, args = getopt.getopt(argv,"r:t:p:",["rootdir=","table=","partition="])
+   except getopt.GetoptError:
+      print( 'test.py -r <rootdir> -t <table> -p <partition>')
+      sys.exit(2)
+   for opt, arg in opts:
+      if opt == '-h':
+         print( 'test.py -r <rootdir> -t <table> -p <partition>')
+         sys.exit()
+      elif opt in ("-r", "--rootdir"):
+         rootdir = arg
+      elif opt in ("-t", "--table"):
+         table = arg
+      elif opt in ("-p", "--partition"):
+         partition = arg
+   print( 'Source directory is "', rootdir)
+   print( 'Destination table is "', table)
+   print( 'Destination partition is "', partition)
+
+   conn = psycopg2.connect("dbname=photolib user=stef password=pass")
+   cursor = conn.cursor()
+   print("Connected!\n")
+   query = "truncate table " + table + "_" + partition + "_p";
+   cursor.execute(query)
+   print('source label : ' + partition + ' , path : ' + rootdir )
+   for dirName,subdirList, fileList in os.walk(rootdir):
+#	print('Found directory: %s' % dirName)
+     for fname in fileList:
+#		print('\t%s' % fname)  
+        path=os.path.join(dirName, fname)
+        if os.path.islink(path):
+           print('skipping path ' + path)
+           continue
+        statinfo = os.stat(dirName + '/' + fname)
+        query = "insert into " + table + "(src,dr,nm,url,sz,created) values (%s, %s, %s, %s, %s, %s);"
+        data = (partition, dirName, fname, dirName + '/' + fname, statinfo.st_size, date.today())
+        cursor.execute(query, data)
+        conn.commit()
+
+
+if __name__ == "__main__":
+   main(sys.argv[1:])

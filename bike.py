@@ -6,6 +6,7 @@ import time
 from datetime import datetime, timedelta
 
 con = mdb.connect('192.168.1.216', 'stef', 'pass', 'mydb')
+
 p0 = input("enter mod, del or defaults to new : ") or "new"
 p1 = input("enter date, y for yesterday, defaults to today : ") or time.strftime("%Y-%m-%d")
 p2 = input("enter time : ")
