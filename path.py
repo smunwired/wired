@@ -1,3 +1,7 @@
+#photolib=# create table filelist(src text,dr text,nm text, sz bigint, created timestamp default now()) partition by list(src);
+#CREATE TABLE
+#photolib=# create table filelist_Document20220921_p partition of filelist for values in ('Document20220921');
+#CREATE TABLE
 #!/usr/bin/python
 
 import sys, getopt
@@ -28,7 +32,7 @@ def main(argv):
    print( 'Destination table is "', table)
    print( 'Destination partition is "', partition)
 
-   conn = psycopg2.connect("dbname=photolib user=stef password=pass")
+   conn = psycopg2.connect("host=localhost dbname=photolib user=stef password=pass")
    cursor = conn.cursor()
    print("Connected!\n")
    query = "truncate table " + table + "_" + partition + "_p";
