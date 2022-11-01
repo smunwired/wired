@@ -2,7 +2,6 @@
 #CREATE TABLE
 #photolib=# create table filelist_documents_p partition of filelist for values in ('documents');
 #CREATE TABLE
-#LINE 1: insert into filelist(src,dr,nm,url,sz,created) values ('docu...
 #!/usr/bin/python
 
 import sys, getopt
