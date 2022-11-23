@@ -1,6 +1,10 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
+<<<<<<< HEAD
+#import MySQLdb as mdb
+=======
+>>>>>>> 62ba3d05041b50324462137870e8685181e662d2
 import pymysql as mdb
 import time
 from datetime import datetime, timedelta
