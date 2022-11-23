@@ -1,6 +1,6 @@
-#photolib=# create table filelist(src text,dr text,nm text, sz bigint, created timestamp default now()) partition by list(src);
+#photolib=# create table filelist(src text,url text,dr text,nm text, sz bigint, created timestamp default now()) partition by list(src);
 #CREATE TABLE
-#photolib=# create table filelist_Document20220921_p partition of filelist for values in ('Document20220921');
+#photolib=# create table filelist_documents_p partition of filelist for values in ('documents');
 #CREATE TABLE
 #!/usr/bin/python
 
@@ -14,25 +14,28 @@ def main(argv):
    table = ''
    partition = ''
    try:
-       opts, args = getopt.getopt(argv,"r:t:p:",["rootdir=","table=","partition="])
+       opts, args = getopt.getopt(argv,"d:r:t:p:",["dbhost=","rootdir=","table=","partition="])
    except getopt.GetoptError:
-      print( 'test.py -r <rootdir> -t <table> -p <partition>')
+      print( 'test.py -d <database host> -r <rootdir> -t <table> -p <partition>')
       sys.exit(2)
    for opt, arg in opts:
       if opt == '-h':
-         print( 'test.py -r <rootdir> -t <table> -p <partition>')
+         print( 'test.py -d <database host> -r <rootdir> -t <table> -p <partition>')
          sys.exit()
+      elif opt in ("-d", "--dbhost"):
+         dbhost = arg
       elif opt in ("-r", "--rootdir"):
          rootdir = arg
       elif opt in ("-t", "--table"):
          table = arg
       elif opt in ("-p", "--partition"):
          partition = arg
+   print( 'Database host is "', rootdir)
    print( 'Source directory is "', rootdir)
    print( 'Destination table is "', table)
    print( 'Destination partition is "', partition)
 
-   conn = psycopg2.connect("host=localhost dbname=photolib user=stef password=pass")
+   conn = psycopg2.connect("host=" + dbhost + " dbname=photolib user=stef password=pass")
    cursor = conn.cursor()
    print("Connected!\n")
    query = "truncate table " + table + "_" + partition + "_p";

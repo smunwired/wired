@@ -1,12 +1,12 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import MySQLdb as mdb
+import pymysql as mdb
 import time
 from datetime import datetime, timedelta
+import sys
 
-con = mdb.connect('192.168.1.216', 'stef', 'pass', 'mydb')
-
+con = mdb.connect(host=sys.argv[1], user='stef', password='pass', database='mydb')
 p0 = input("enter mod, del or defaults to new : ") or "new"
 p1 = input("enter date, y for yesterday, defaults to today : ") or time.strftime("%Y-%m-%d")
 p2 = input("enter time : ")
