@@ -9,7 +9,7 @@ con = None
 
 try:
      
-    con = psycopg2.connect("dbname='testdb' user='janbodnar'") 
+    con = psycopg2.connect("dbname='testdb' user='stephanmunn'") 
     
     cur = con.cursor()    
     cur.execute("SELECT * FROM Cars")
@@ -17,11 +17,11 @@ try:
     rows = cur.fetchall()
 
     for row in rows:
-        print row
+        print(row)
     
 
-except psycopg2.DatabaseError, e:
-    print 'Error %s' % e    
+except psycopg2.DatabaseError as e:
+    print('Error %s' % e)    
     sys.exit(1)
     
     

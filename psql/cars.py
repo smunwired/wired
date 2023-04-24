@@ -5,33 +5,39 @@ import psycopg2
 import sys
 
 
+cars = (
+    (1, 'Audi', 52642),
+    (2, 'Mercedes', 57127),
+    (3, 'Skoda', 9000),
+    (4, 'Volvo', 29000),
+    (5, 'Bentley', 350000),
+    (6, 'Citroen', 21000),
+    (7, 'Hummer', 41400),
+    (8, 'Volkswagen', 21600)
+)
+
 con = None
 
 try:
      
-    con = psycopg2.connect("dbname='testdb' user='janbodnar'")   
-    
-    cur = con.cursor()
+    con = psycopg2.connect("dbname='testdb' user='stephanmunn'")   
   
-    cur.execute("CREATE TABLE Cars(Id INTEGER PRIMARY KEY, Name VARCHAR(20), Price INT)")
-    cur.execute("INSERT INTO Cars VALUES(1,'Audi',52642)")
-    cur.execute("INSERT INTO Cars VALUES(2,'Mercedes',57127)")
-    cur.execute("INSERT INTO Cars VALUES(3,'Skoda',9000)")
-    cur.execute("INSERT INTO Cars VALUES(4,'Volvo',29000)")
-    cur.execute("INSERT INTO Cars VALUES(5,'Bentley',350000)")
-    cur.execute("INSERT INTO Cars VALUES(6,'Citroen',21000)")
-    cur.execute("INSERT INTO Cars VALUES(7,'Hummer',41400)")
-    cur.execute("INSERT INTO Cars VALUES(8,'Volkswagen',21600)")
+    cur = con.cursor()  
     
+    cur.execute("DROP TABLE IF EXISTS Cars")
+    cur.execute("CREATE TABLE Cars(Id INT PRIMARY KEY, Name TEXT, Price INT)")
+    query = "INSERT INTO Cars (Id, Name, Price) VALUES (%s, %s, %s)"
+    cur.executemany(query, cars)
+        
     con.commit()
     
 
-except psycopg2.DatabaseError, e:
+except psycopg2.DatabaseError as e:
     
     if con:
         con.rollback()
     
-    print 'Error %s' % e    
+    print('Error %s' % e    )
     sys.exit(1)
     
     
