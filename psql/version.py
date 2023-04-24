@@ -9,15 +9,15 @@ con = None
 
 try:
      
-    con = psycopg2.connect(database='testdb', user='janbodnar') 
+    con = psycopg2.connect(database='testdb', user='stephanmunn') 
     cur = con.cursor()
     cur.execute('SELECT version()')          
     ver = cur.fetchone()
-    print ver    
+    print(ver)
     
 
-except psycopg2.DatabaseError, e:
-    print 'Error %s' % e    
+except psycopg2.DatabaseError as e:
+    print('Error %s' % e)    
     sys.exit(1)
     
     
