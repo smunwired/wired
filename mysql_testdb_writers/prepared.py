@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import MySQLdb as mdb
+import pymysql as mdb
 
-con = mdb.connect('localhost', 'testuser', 'test623', 'testdb')
+con = mdb.connect(host='localhost', user='testuser', password='test623', database='testdb')
     
 with con:    
 
@@ -12,4 +12,6 @@ with con:
     cur.execute("UPDATE Writers SET Name = %s WHERE Id = %s", 
         ("Guy de Maupasant", "4"))        
     
-    print "Number of rows updated:",  cur.rowcount
+    print("Number of rows updated:",  cur.rowcount)
+
+    con.commit()

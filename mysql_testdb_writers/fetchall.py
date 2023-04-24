@@ -1,9 +1,9 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import MySQLdb as mdb
+import pymysql as mdb
 
-con = mdb.connect('localhost', 'testuser', 'test623', 'testdb');
+con = mdb.connect(host='localhost', user='testuser', password='test623', database='testdb');
 
 with con: 
 
@@ -13,4 +13,4 @@ with con:
     rows = cur.fetchall()
 
     for row in rows:
-        print row
+        print(row)
