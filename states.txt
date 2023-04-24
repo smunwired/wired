@@ -1,0 +1,27 @@
+alabama
+alaska
+arkansas
+california
+north carolina
+south carolina
+connecticut
+delaware
+florida
+georgia
+hawaii
+indiana
+lousiana
+maine
+mississippi
+missouri
+nebraska
+nevada
+new mexico
+new york
+ohio
+oregon
+philidelphia
+texas
+washington
+west virginia
+wyoming
