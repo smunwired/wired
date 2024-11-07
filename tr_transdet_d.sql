@@ -23,6 +23,7 @@ insert into transdet_audit (
 	cost_code,
 	crdd,
 	brnd,
+	booking,
 	payment_type
 ) select 
 	tran_id,
@@ -47,6 +48,7 @@ insert into transdet_audit (
 	cost_code,
 	crdd,
 	brnd,
+	booking,
 	payment_type
 from transdet where tran_id=old.tran_id;
 end */;;
