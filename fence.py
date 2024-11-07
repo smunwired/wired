@@ -1,7 +1,8 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-import pymysql as mdb
+#import pymysql as mdb
+import MySQLdb as mdb
 import time
 from datetime import datetime, timedelta
 import sys
