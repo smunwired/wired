@@ -11,8 +11,7 @@ insert into transdet_audit (
 	account_id,
 	statement_date,
 	cheque_no,
-	receipt_ind,
-	dd_ind,
+	receipt_date,
 	date_created,
 	user_created,
 	date_amended,
@@ -23,7 +22,6 @@ insert into transdet_audit (
 	cost_code,
 	crdd,
 	brnd,
-	contactless,
 	booking,
 	payment_type
 ) select 
@@ -37,8 +35,7 @@ insert into transdet_audit (
 	account_id,
 	statement_date,
 	cheque_no,
-	receipt_ind,
-	dd_ind,
+	receipt_date,
 	date_created,
 	user_created,
 	date_amended,
@@ -49,7 +46,6 @@ insert into transdet_audit (
 	cost_code,
 	crdd,
 	brnd,
-	contactless,
 	booking,
 	payment_type
 from transdet where tran_id=old.tran_id;

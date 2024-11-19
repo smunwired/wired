@@ -6,9 +6,9 @@ DELIMITER ;;
 insert into transdet_audit (
         tran_id,tran_date,tran_creditor,tran_desc,tran_amount,
     cr_dr,tran_type_id,account_id,statement_date,cheque_no,
-    receipt_ind,dd_ind,date_created,user_created,
+    receipt_date,date_created,user_created,
     date_amended,user_amended,frequency,cred_id,branch_id,
-    cost_code,crdd,brnd,contactless,booking,payment_type)
+    cost_code,crdd,brnd,booking,payment_type)
 select
         tran_id,
 	tran_date,
@@ -20,8 +20,7 @@ select
 	account_id,
 	statement_date,
 	cheque_no,
-	receipt_ind,
-	dd_ind,
+	receipt_date,
 	date_created,
 	user_created,
 	date_amended,
@@ -32,7 +31,6 @@ select
 	cost_code,
 	crdd,
 	brnd,
-	contactless,
 	booking,
 	payment_type
 from transdet where tran_id=old.tran_id;
