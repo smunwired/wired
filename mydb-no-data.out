@@ -1,0 +1,1454 @@
+/*!999999\- enable the sandbox mode */ 
+-- MariaDB dump 10.19  Distrib 10.11.8-MariaDB, for debian-linux-gnu (aarch64)
+--
+-- Host: localhost    Database: mydb
+-- ------------------------------------------------------
+-- Server version	10.11.8-MariaDB-0ubuntu0.24.04.1
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+/*!40103 SET TIME_ZONE='+00:00' */;
+/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `account`
+--
+
+DROP TABLE IF EXISTS `account`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `account` (
+  `account_id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_name` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=102 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `artist`
+--
+
+DROP TABLE IF EXISTS `artist`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artist` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `prefix` varchar(25) DEFAULT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `joinstr` varchar(25) DEFAULT NULL,
+  `bandname` varchar(100) DEFAULT NULL,
+  `collaborators` varchar(100) DEFAULT NULL,
+  `idxnm` varchar(100) NOT NULL,
+  `predx` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=567 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `artist_backup_20211029_togo`
+--
+
+DROP TABLE IF EXISTS `artist_backup_20211029_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `artist_backup_20211029_togo` (
+  `id` mediumint(9) NOT NULL DEFAULT 0,
+  `prefix` varchar(25) DEFAULT NULL,
+  `firstname` varchar(50) DEFAULT NULL,
+  `lastname` varchar(50) DEFAULT NULL,
+  `joinstr` varchar(25) DEFAULT NULL,
+  `bandname` varchar(100) DEFAULT NULL,
+  `collaborators` varchar(100) DEFAULT NULL,
+  `idxnm` varchar(100) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `auth_group`
+--
+
+DROP TABLE IF EXISTS `auth_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(150) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `name` (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `auth_group_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_group_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_group_permissions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `group_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_group_permissions_group_id_permission_id_0cd325b0_uniq` (`group_id`,`permission_id`),
+  KEY `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `auth_permission`
+--
+
+DROP TABLE IF EXISTS `auth_permission`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_permission` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `content_type_id` int(11) NOT NULL,
+  `codename` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_permission_content_type_id_codename_01ab375a_uniq` (`content_type_id`,`codename`),
+  CONSTRAINT `auth_permission_content_type_id_2f476e4b_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=282 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `auth_user`
+--
+
+DROP TABLE IF EXISTS `auth_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `password` varchar(128) NOT NULL,
+  `last_login` datetime(6) DEFAULT NULL,
+  `is_superuser` tinyint(1) NOT NULL,
+  `username` varchar(150) NOT NULL,
+  `first_name` varchar(150) NOT NULL,
+  `last_name` varchar(150) NOT NULL,
+  `email` varchar(254) NOT NULL,
+  `is_staff` tinyint(1) NOT NULL,
+  `is_active` tinyint(1) NOT NULL,
+  `date_joined` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `username` (`username`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `auth_user_groups`
+--
+
+DROP TABLE IF EXISTS `auth_user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_groups` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_groups_user_id_group_id_94350c0c_uniq` (`user_id`,`group_id`),
+  KEY `auth_user_groups_group_id_97559544_fk_auth_group_id` (`group_id`),
+  CONSTRAINT `auth_user_groups_group_id_97559544_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`),
+  CONSTRAINT `auth_user_groups_user_id_6a12ed8b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `auth_user_user_permissions`
+--
+
+DROP TABLE IF EXISTS `auth_user_user_permissions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `auth_user_user_permissions` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `permission_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `auth_user_user_permissions_user_id_permission_id_14a6b632_uniq` (`user_id`,`permission_id`),
+  KEY `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` (`permission_id`),
+  CONSTRAINT `auth_user_user_permi_permission_id_1fbb5f2c_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
+  CONSTRAINT `auth_user_user_permissions_user_id_a95ead1b_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bike`
+--
+
+DROP TABLE IF EXISTS `bike`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bike` (
+  `rdate` date NOT NULL,
+  `tm` time DEFAULT NULL,
+  `dst` float NOT NULL DEFAULT 0,
+  `av` float NOT NULL DEFAULT 0,
+  `mx` float NOT NULL DEFAULT 0,
+  `odo_float` float DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `odo` float NOT NULL DEFAULT 0,
+  `odo_calc` int(11) DEFAULT NULL,
+  `odo_reset` tinyint(1) DEFAULT NULL,
+  `unit` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bike2_togo`
+--
+
+DROP TABLE IF EXISTS `bike2_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bike2_togo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dt` date DEFAULT NULL,
+  `dst` float DEFAULT NULL,
+  `trp` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bike_copy`
+--
+
+DROP TABLE IF EXISTS `bike_copy`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bike_copy` (
+  `rdate` date NOT NULL,
+  `tm` time DEFAULT NULL,
+  `dst` float NOT NULL DEFAULT 0,
+  `av` float NOT NULL DEFAULT 0,
+  `mx` float NOT NULL DEFAULT 0,
+  `odo_float` float DEFAULT NULL,
+  `notes` varchar(255) DEFAULT NULL,
+  `odo` float NOT NULL DEFAULT 0,
+  `odo_calc` int(11) DEFAULT NULL,
+  `odo_reset` smallint(6) DEFAULT NULL,
+  `unit` char(1) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bike_km_togo`
+--
+
+DROP TABLE IF EXISTS `bike_km_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bike_km_togo` (
+  `rdate` text DEFAULT NULL,
+  `tm` text DEFAULT NULL,
+  `dst` text DEFAULT NULL,
+  `av` text DEFAULT NULL,
+  `mx` text DEFAULT NULL,
+  `odo` text DEFAULT NULL,
+  `odo_adj` double DEFAULT NULL,
+  `odo_km` double DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `odo-pre-adj` text DEFAULT NULL,
+  `odo_reset` int(11) DEFAULT NULL,
+  `unit` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_booking`
+--
+
+DROP TABLE IF EXISTS `bk_booking`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_booking` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `carrier` int(11) NOT NULL,
+  `ref` varchar(45) NOT NULL,
+  `booked` date DEFAULT NULL,
+  `outbound` int(11) DEFAULT NULL,
+  `outdt` date DEFAULT NULL,
+  `inbound` int(11) DEFAULT NULL,
+  `indt` date DEFAULT NULL,
+  `cost` float NOT NULL,
+  `notes` text DEFAULT NULL,
+  `outst` int(11) DEFAULT NULL,
+  `inst` int(11) DEFAULT NULL,
+  `type` int(11) NOT NULL,
+  `venue` int(11) DEFAULT NULL,
+  `event_date` date DEFAULT NULL,
+  `event_date_start` date DEFAULT NULL,
+  `event_date_end` date DEFAULT NULL,
+  `destination` int(11) DEFAULT NULL,
+  `nights` int(11) DEFAULT NULL,
+  `origin` int(11) DEFAULT NULL,
+  `seats` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=204 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_booking_type`
+--
+
+DROP TABLE IF EXISTS `bk_booking_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_booking_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_carrier`
+--
+
+DROP TABLE IF EXISTS `bk_carrier`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_carrier` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(45) NOT NULL,
+  `shrt` varchar(9) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `carrier_unique_name` (`nm`)
+) ENGINE=InnoDB AUTO_INCREMENT=41 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_destination`
+--
+
+DROP TABLE IF EXISTS `bk_destination`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_destination` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `cd` varchar(3) DEFAULT NULL,
+  `nm` varchar(45) DEFAULT NULL,
+  `dtyp` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `cd_UNIQUE` (`cd`)
+) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_destination_type`
+--
+
+DROP TABLE IF EXISTS `bk_destination_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_destination_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `typ` varchar(22) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_flight`
+--
+
+DROP TABLE IF EXISTS `bk_flight`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_flight` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(45) DEFAULT NULL,
+  `dpdst` int(11) DEFAULT NULL,
+  `dptm` time DEFAULT NULL,
+  `ardst` int(11) DEFAULT NULL,
+  `artm` time DEFAULT NULL,
+  `opr` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  KEY `opr` (`opr`),
+  CONSTRAINT `bk_flight_ibfk_1` FOREIGN KEY (`opr`) REFERENCES `bk_carrier` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_stage`
+--
+
+DROP TABLE IF EXISTS `bk_stage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_stage` (
+  `booking` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direction` int(11) NOT NULL DEFAULT 0,
+  `sequence` int(11) NOT NULL DEFAULT 0,
+  `bound` int(11) DEFAULT NULL,
+  `dt` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `bk_stage_no_longer_used`
+--
+
+DROP TABLE IF EXISTS `bk_stage_no_longer_used`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `bk_stage_no_longer_used` (
+  `booking` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direction` int(11) NOT NULL DEFAULT 0,
+  `sequence` int(11) NOT NULL DEFAULT 0,
+  `bound` int(11) DEFAULT NULL,
+  `dt` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `book`
+--
+
+DROP TABLE IF EXISTS `book`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `book` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `frmt` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=111 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `breakfast`
+--
+
+DROP TABLE IF EXISTS `breakfast`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `breakfast` (
+  `spam` text DEFAULT NULL,
+  `eggs` text DEFAULT NULL,
+  `sausage` text DEFAULT NULL,
+  `price` float DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `brn20190620_togo`
+--
+
+DROP TABLE IF EXISTS `brn20190620_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `brn20190620_togo` (
+  `brnd` smallint(6) DEFAULT NULL,
+  `brn` varchar(100) NOT NULL,
+  KEY `brnididx` (`brnd`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `brnn20190620_togo`
+--
+
+DROP TABLE IF EXISTS `brnn20190620_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `brnn20190620_togo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10402 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `card`
+--
+
+DROP TABLE IF EXISTS `card`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `card` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `account_id` int(11) DEFAULT NULL,
+  `card_number` bigint(20) DEFAULT NULL,
+  `valid_from` varchar(5) DEFAULT NULL,
+  `expires` varchar(5) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `account_id` (`account_id`),
+  CONSTRAINT `card_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`account_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `catalog_author`
+--
+
+DROP TABLE IF EXISTS `catalog_author`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalog_author` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `date_of_birth` date DEFAULT NULL,
+  `date_of_death` date DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `catalog_book`
+--
+
+DROP TABLE IF EXISTS `catalog_book`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalog_book` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(200) NOT NULL,
+  `summary` longtext NOT NULL,
+  `isbn` varchar(13) NOT NULL,
+  `author_id` bigint(20) DEFAULT NULL,
+  `language_id` bigint(20) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `isbn` (`isbn`),
+  KEY `catalog_book_author_id_b0849980_fk_catalog_author_id` (`author_id`),
+  KEY `catalog_book_language_id_447f859e_fk_catalog_language_id` (`language_id`),
+  CONSTRAINT `catalog_book_author_id_b0849980_fk_catalog_author_id` FOREIGN KEY (`author_id`) REFERENCES `catalog_author` (`id`),
+  CONSTRAINT `catalog_book_language_id_447f859e_fk_catalog_language_id` FOREIGN KEY (`language_id`) REFERENCES `catalog_language` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `catalog_book_genre`
+--
+
+DROP TABLE IF EXISTS `catalog_book_genre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalog_book_genre` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `book_id` bigint(20) NOT NULL,
+  `genre_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `catalog_book_genre_book_id_genre_id_d15f6922_uniq` (`book_id`,`genre_id`),
+  KEY `catalog_book_genre_genre_id_77d7ffde_fk_catalog_genre_id` (`genre_id`),
+  CONSTRAINT `catalog_book_genre_book_id_e5a77c43_fk_catalog_book_id` FOREIGN KEY (`book_id`) REFERENCES `catalog_book` (`id`),
+  CONSTRAINT `catalog_book_genre_genre_id_77d7ffde_fk_catalog_genre_id` FOREIGN KEY (`genre_id`) REFERENCES `catalog_genre` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `catalog_bookinstance`
+--
+
+DROP TABLE IF EXISTS `catalog_bookinstance`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalog_bookinstance` (
+  `id` char(32) NOT NULL,
+  `imprint` varchar(200) NOT NULL,
+  `due_back` date DEFAULT NULL,
+  `status` varchar(1) NOT NULL,
+  `book_id` bigint(20) DEFAULT NULL,
+  `borrower_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `catalog_bookinstance_book_id_69f93415_fk_catalog_book_id` (`book_id`),
+  KEY `catalog_bookinstance_borrower_id_0d71c37c_fk_auth_user_id` (`borrower_id`),
+  CONSTRAINT `catalog_bookinstance_book_id_69f93415_fk_catalog_book_id` FOREIGN KEY (`book_id`) REFERENCES `catalog_book` (`id`),
+  CONSTRAINT `catalog_bookinstance_borrower_id_0d71c37c_fk_auth_user_id` FOREIGN KEY (`borrower_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `catalog_genre`
+--
+
+DROP TABLE IF EXISTS `catalog_genre`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalog_genre` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `catalog_language`
+--
+
+DROP TABLE IF EXISTS `catalog_language`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `catalog_language` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `name` varchar(200) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `cost_center`
+--
+
+DROP TABLE IF EXISTS `cost_center`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `cost_center` (
+  `cost_code` smallint(6) DEFAULT NULL,
+  `cost` varchar(100) DEFAULT NULL,
+  `descr` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `crdn20190620_togo`
+--
+
+DROP TABLE IF EXISTS `crdn20190620_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `crdn20190620_togo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `crdd` int(11) NOT NULL,
+  `nm` varchar(100) DEFAULT NULL,
+  `dtm` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10324 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `django_admin_log`
+--
+
+DROP TABLE IF EXISTS `django_admin_log`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_admin_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `action_time` datetime(6) NOT NULL,
+  `object_id` longtext DEFAULT NULL,
+  `object_repr` varchar(200) NOT NULL,
+  `action_flag` smallint(5) unsigned NOT NULL,
+  `change_message` longtext NOT NULL,
+  `content_type_id` int(11) DEFAULT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `django_admin_log_content_type_id_c4bce8eb_fk_django_co` (`content_type_id`),
+  KEY `django_admin_log_user_id_c564eba6_fk_auth_user_id` (`user_id`),
+  CONSTRAINT `django_admin_log_content_type_id_c4bce8eb_fk_django_co` FOREIGN KEY (`content_type_id`) REFERENCES `django_content_type` (`id`),
+  CONSTRAINT `django_admin_log_user_id_c564eba6_fk_auth_user_id` FOREIGN KEY (`user_id`) REFERENCES `auth_user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `django_content_type`
+--
+
+DROP TABLE IF EXISTS `django_content_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_content_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `app_label` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `django_content_type_app_label_model_76bd3d3b_uniq` (`app_label`,`model`)
+) ENGINE=InnoDB AUTO_INCREMENT=71 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `django_migrations`
+--
+
+DROP TABLE IF EXISTS `django_migrations`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_migrations` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `app` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `applied` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `django_session`
+--
+
+DROP TABLE IF EXISTS `django_session`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `django_session` (
+  `session_key` varchar(40) NOT NULL,
+  `session_data` longtext NOT NULL,
+  `expire_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`session_key`),
+  KEY `django_session_expire_date_a5c62663` (`expire_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `employees`
+--
+
+DROP TABLE IF EXISTS `employees`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `employees` (
+  `first_name` varchar(100) DEFAULT NULL,
+  `last_name` varchar(100) DEFAULT NULL,
+  `hire_date` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `fence`
+--
+
+DROP TABLE IF EXISTS `fence`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `fence` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dt` date NOT NULL,
+  `venue` varchar(44) DEFAULT NULL,
+  `activity` char(2) DEFAULT NULL,
+  `lesson` int(11) DEFAULT 0,
+  `txt` varchar(255) DEFAULT NULL,
+  `visitors` int(11) DEFAULT 0,
+  `visitors_paid` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=628 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `frequency`
+--
+
+DROP TABLE IF EXISTS `frequency`;
+/*!50001 DROP VIEW IF EXISTS `frequency`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `frequency` AS SELECT
+ 1 AS `freq_id`,
+  1 AS `freq_name` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `frq`
+--
+
+DROP TABLE IF EXISTS `frq`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `frq` (
+  `frqd` smallint(6) DEFAULT NULL,
+  `frq` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `heading`
+--
+
+DROP TABLE IF EXISTS `heading`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `heading` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(40) DEFAULT NULL,
+  `display` tinyint(4) DEFAULT 0,
+  `display_seq` int(11) DEFAULT NULL,
+  `image_width` int(11) DEFAULT 100,
+  `image_height` int(11) DEFAULT 100,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `image`
+--
+
+DROP TABLE IF EXISTS `image`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `image` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `heading` varchar(40) DEFAULT NULL,
+  `url` varchar(8000) DEFAULT NULL,
+  `alt` varchar(100) DEFAULT NULL,
+  `display_seq` int(11) DEFAULT NULL,
+  `title` mediumint(9) DEFAULT NULL,
+  `wdth` int(11) DEFAULT NULL,
+  `hght` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1356 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `image_heading`
+--
+
+DROP TABLE IF EXISTS `image_heading`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `image_heading` (
+  `image` int(11) NOT NULL DEFAULT 0,
+  `heading` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`image`,`heading`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `image_title`
+--
+
+DROP TABLE IF EXISTS `image_title`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `image_title` (
+  `image` mediumint(9) NOT NULL DEFAULT 0,
+  `title` mediumint(9) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`image`,`title`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `medium`
+--
+
+DROP TABLE IF EXISTS `medium`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `medium` (
+  `id` smallint(6) NOT NULL DEFAULT 0,
+  `medium` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `mydb_product`
+--
+
+DROP TABLE IF EXISTS `mydb_product`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `mydb_product` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `title` varchar(120) NOT NULL,
+  `description` longtext NOT NULL,
+  `price` decimal(19,2) NOT NULL,
+  `image` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `name20190620_togo`
+--
+
+DROP TABLE IF EXISTS `name20190620_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `name20190620_togo` (
+  `id` int(11) NOT NULL DEFAULT 0,
+  `crdd` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(100) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `dtm` datetime DEFAULT NULL,
+  `dtf` date NOT NULL DEFAULT '1000-01-01',
+  `dtt` date NOT NULL DEFAULT '3000-01-01',
+  `typ` int(11) DEFAULT 1,
+  PRIMARY KEY (`crdd`,`dtf`,`dtt`)
+) ENGINE=InnoDB AUTO_INCREMENT=1000001 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `names`
+--
+
+DROP TABLE IF EXISTS `names`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `names` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `typ` int(11) NOT NULL DEFAULT 1,
+  `dtf` date NOT NULL DEFAULT '1000-01-01',
+  `dtt` date NOT NULL DEFAULT '3000-01-01',
+  `nm` text DEFAULT NULL,
+  `notes` char(255) DEFAULT NULL,
+  PRIMARY KEY (`id`,`typ`,`dtf`,`dtt`)
+) ENGINE=InnoDB AUTO_INCREMENT=11453 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `outs`
+--
+
+DROP TABLE IF EXISTS `outs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `outs` (
+  `booking` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `outbound` int(11) DEFAULT NULL,
+  `outdt` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `paragr`
+--
+
+DROP TABLE IF EXISTS `paragr`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `paragr` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `dt` date DEFAULT NULL,
+  `txt` text DEFAULT NULL,
+  `md` timestamp NOT NULL DEFAULT current_timestamp(),
+  UNIQUE KEY `id` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=818 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `parley_instrument`
+--
+
+DROP TABLE IF EXISTS `parley_instrument`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `parley_instrument` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `manufacturer` varchar(100) NOT NULL,
+  `model` varchar(100) NOT NULL,
+  `origin` varchar(100) NOT NULL,
+  `year` date NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `payment_type`
+--
+
+DROP TABLE IF EXISTS `payment_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `payment_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `polls_choice`
+--
+
+DROP TABLE IF EXISTS `polls_choice`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `polls_choice` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `choice_text` varchar(200) NOT NULL,
+  `votes` int(11) NOT NULL,
+  `question_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `polls_choice_question_id_c5b4b260_fk_polls_question_id` (`question_id`),
+  CONSTRAINT `polls_choice_question_id_c5b4b260_fk_polls_question_id` FOREIGN KEY (`question_id`) REFERENCES `polls_question` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `polls_question`
+--
+
+DROP TABLE IF EXISTS `polls_question`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `polls_question` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `question_text` varchar(200) NOT NULL,
+  `pub_date` datetime(6) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `stage`
+--
+
+DROP TABLE IF EXISTS `stage`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stage` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `booking` int(11) NOT NULL,
+  `direction` int(11) NOT NULL COMMENT '0 outbount, 1 inbound, 2 destination',
+  `sequence` int(11) NOT NULL,
+  `flight` int(11) DEFAULT NULL,
+  `stage_date` date DEFAULT NULL,
+  `seats` int(11) DEFAULT NULL,
+  `destination` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `booking` (`booking`),
+  KEY `destination` (`destination`),
+  CONSTRAINT `stage_ibfk_1` FOREIGN KEY (`booking`) REFERENCES `bk_booking` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `stage_ibfk_2` FOREIGN KEY (`destination`) REFERENCES `bk_destination` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=163 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `stage_backup_with_type_togo`
+--
+
+DROP TABLE IF EXISTS `stage_backup_with_type_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stage_backup_with_type_togo` (
+  `type` int(11) DEFAULT NULL,
+  `id` int(11) NOT NULL DEFAULT 0,
+  `booking` int(11) NOT NULL,
+  `direction` int(11) NOT NULL COMMENT '0 outbount, 1 inbound, 2 destination',
+  `sequence` int(11) NOT NULL,
+  `flight` int(11) DEFAULT NULL,
+  `stage_date` date DEFAULT NULL,
+  `seats` int(11) DEFAULT NULL,
+  `destination` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `stage_copy_togo`
+--
+
+DROP TABLE IF EXISTS `stage_copy_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stage_copy_togo` (
+  `booking` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direction` int(11) NOT NULL DEFAULT 0,
+  `sequence` int(11) NOT NULL DEFAULT 0,
+  `bound` int(11) DEFAULT NULL,
+  `dt` date DEFAULT NULL,
+  `st` int(11) DEFAULT NULL,
+  `booking_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `stage_old_togo`
+--
+
+DROP TABLE IF EXISTS `stage_old_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stage_old_togo` (
+  `booking` varchar(45) CHARACTER SET latin1 COLLATE latin1_swedish_ci DEFAULT NULL,
+  `direction` int(11) NOT NULL DEFAULT 0,
+  `sequence` int(11) NOT NULL DEFAULT 0,
+  `bound` int(11) DEFAULT NULL,
+  `dt` date DEFAULT NULL,
+  `st` int(11) DEFAULT NULL,
+  `booking_id` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `standby`
+--
+
+DROP TABLE IF EXISTS `standby`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `standby` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dt` date DEFAULT NULL,
+  `hrs` int(11) DEFAULT NULL,
+  `txt` varchar(255) DEFAULT NULL,
+  `stby` int(11) DEFAULT 0,
+  `rt` float DEFAULT 1,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=301 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `supplier_togo`
+--
+
+DROP TABLE IF EXISTS `supplier_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `supplier_togo` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `t_togo`
+--
+
+DROP TABLE IF EXISTS `t_togo`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `t_togo` (
+  `txt` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `title`
+--
+
+DROP TABLE IF EXISTS `title`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `title` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `artist` mediumint(9) NOT NULL,
+  `title` varchar(100) DEFAULT NULL,
+  `prefix` varchar(25) DEFAULT NULL,
+  `first_released` int(11) DEFAULT NULL,
+  `compilation` char(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `title_u` (`artist`,`title`),
+  KEY `artist` (`artist`),
+  CONSTRAINT `fk_title_artist` FOREIGN KEY (`artist`) REFERENCES `artist` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1156 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `title_listen`
+--
+
+DROP TABLE IF EXISTS `title_listen`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `title_listen` (
+  `title` int(11) DEFAULT NULL,
+  `listen_date` date DEFAULT NULL,
+  KEY `title_listen_listen_date_idx` (`listen_date`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `title_medium`
+--
+
+DROP TABLE IF EXISTS `title_medium`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `title_medium` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `title` mediumint(9) NOT NULL,
+  `medium` smallint(6) NOT NULL,
+  `release_year` smallint(6) DEFAULT NULL,
+  `label` varchar(66) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `title` (`title`),
+  KEY `medium` (`medium`),
+  CONSTRAINT `title_medium_ibfk_1` FOREIGN KEY (`title`) REFERENCES `title` (`id`),
+  CONSTRAINT `title_medium_ibfk_2` FOREIGN KEY (`medium`) REFERENCES `medium` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=703 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `tran_type`
+--
+
+DROP TABLE IF EXISTS `tran_type`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `tran_type` (
+  `tran_type_id` smallint(6) NOT NULL DEFAULT 0,
+  `tran_type` varchar(100) DEFAULT NULL,
+  PRIMARY KEY (`tran_type_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `transdet`
+--
+
+DROP TABLE IF EXISTS `transdet`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transdet` (
+  `tran_id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `tran_date` date DEFAULT NULL,
+  `tran_creditor` varchar(100) DEFAULT NULL,
+  `tran_desc` varchar(512) DEFAULT NULL,
+  `tran_amount` decimal(9,2) DEFAULT NULL,
+  `cr_dr` tinyint(4) DEFAULT NULL,
+  `tran_type_id` smallint(6) NOT NULL,
+  `account_id` smallint(6) NOT NULL,
+  `statement_date` date DEFAULT NULL,
+  `cheque_no` mediumint(9) DEFAULT NULL,
+  `receipt_ind` tinyint(4) NOT NULL DEFAULT 0,
+  `dd_ind` tinyint(4) NOT NULL DEFAULT 0,
+  `date_created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `user_created` varchar(100) DEFAULT 'not supplied',
+  `date_amended` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_amended` varchar(100) DEFAULT NULL,
+  `frequency` smallint(6) DEFAULT NULL,
+  `cred_id` smallint(6) DEFAULT NULL,
+  `branch_id` smallint(6) DEFAULT NULL,
+  `cost_code` smallint(6) DEFAULT NULL,
+  `crdd` mediumint(9) DEFAULT NULL,
+  `brnd` mediumint(9) DEFAULT NULL,
+  `contactless` tinyint(4) DEFAULT 0,
+  `booking` int(11) DEFAULT NULL,
+  `payment_type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`tran_id`),
+  KEY `fk2` (`brnd`),
+  KEY `trnsdt_brnd` (`brnd`),
+  KEY `trn_crdd_idx` (`crdd`),
+  KEY `payment_type` (`payment_type`),
+  CONSTRAINT `transdet_ibfk_1` FOREIGN KEY (`payment_type`) REFERENCES `payment_type` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=56706 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`stef`@`192.168.56.%`*/ /*!50003 TRIGGER `tr_transdet_u` BEFORE UPDATE ON `transdet` FOR EACH ROW begin
+
+  set new.date_amended=now();
+
+insert into transdet_audit (
+	tran_id,tran_date,tran_creditor,tran_desc,tran_amount,
+    cr_dr,tran_type_id,account_id,statement_date,cheque_no,
+    receipt_ind,dd_ind,date_created,user_created,
+    date_amended,user_amended,frequency,cred_id,branch_id,
+    cost_code,crdd,brnd,contactless,booking)
+select 
+	tran_id,tran_date,tran_creditor,tran_desc,tran_amount,
+    cr_dr,tran_type_id,account_id,statement_date,cheque_no,
+    receipt_ind,dd_ind,date_created,user_created,
+    date_amended,user_amended,frequency,cred_id,branch_id,
+    cost_code,crdd,brnd,contactless,booking
+from transdet where tran_id=old.tran_id;
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `mydb` CHARACTER SET latin1 COLLATE latin1_swedish_ci ;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb3 */ ;
+/*!50003 SET character_set_results = utf8mb3 */ ;
+/*!50003 SET collation_connection  = utf8mb3_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+/*!50003 CREATE*/ /*!50017 DEFINER=`stef`@`192.168.56.%`*/ /*!50003 TRIGGER `tr_transdet_d` BEFORE DELETE ON `transdet` FOR EACH ROW begin
+insert into transdet_audit (tran_id,tran_date,tran_creditor,tran_desc,tran_amount,cr_dr,tran_type_id,account_id,statement_date,cheque_no,receipt_ind,dd_ind,date_created,user_created,date_amended,user_amended,frequency,cred_id,branch_id,cost_code,crdd,brnd)
+select tran_id,tran_date,tran_creditor,tran_desc,tran_amount,cr_dr,tran_type_id,account_id,statement_date,cheque_no,receipt_ind,dd_ind,date_created,user_created,date_amended,user_amended,frequency,cred_id,branch_id,cost_code,crdd,brnd
+from transdet where tran_id=old.tran_id;
+end */;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+ALTER DATABASE `mydb` CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci ;
+
+--
+-- Table structure for table `transdet_audit`
+--
+
+DROP TABLE IF EXISTS `transdet_audit`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transdet_audit` (
+  `id` mediumint(9) NOT NULL AUTO_INCREMENT,
+  `tran_id` mediumint(9) NOT NULL,
+  `tran_date` date DEFAULT NULL,
+  `tran_creditor` varchar(100) DEFAULT NULL,
+  `tran_desc` varchar(255) DEFAULT NULL,
+  `tran_amount` decimal(9,2) DEFAULT NULL,
+  `cr_dr` tinyint(4) DEFAULT NULL,
+  `tran_type_id` smallint(6) DEFAULT NULL,
+  `account_id` smallint(6) DEFAULT NULL,
+  `statement_date` date DEFAULT NULL,
+  `cheque_no` mediumint(9) DEFAULT NULL,
+  `receipt_ind` tinyint(4) NOT NULL DEFAULT 0,
+  `dd_ind` tinyint(4) NOT NULL DEFAULT 0,
+  `date_created` datetime DEFAULT NULL,
+  `user_created` varchar(100) DEFAULT NULL,
+  `date_amended` datetime DEFAULT NULL,
+  `user_amended` varchar(100) DEFAULT NULL,
+  `frequency` smallint(6) DEFAULT NULL,
+  `cred_id` smallint(6) DEFAULT NULL,
+  `branch_id` smallint(6) DEFAULT NULL,
+  `cost_code` smallint(6) DEFAULT NULL,
+  `date_audited` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `crdd` mediumint(9) DEFAULT NULL,
+  `brnd` mediumint(9) DEFAULT NULL,
+  `contactless` tinyint(4) DEFAULT 0,
+  `booking` int(11) DEFAULT NULL,
+  `payment_type` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=200271 DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `transdet_creditor_20230621`
+--
+
+DROP TABLE IF EXISTS `transdet_creditor_20230621`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `transdet_creditor_20230621` (
+  `tran_id` mediumint(9) NOT NULL DEFAULT 0,
+  `tran_creditor` varchar(100) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `url`
+--
+
+DROP TABLE IF EXISTS `url`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `url` (
+  `url` varchar(8000) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Temporary table structure for view `v_flight`
+--
+
+DROP TABLE IF EXISTS `v_flight`;
+/*!50001 DROP VIEW IF EXISTS `v_flight`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_flight` AS SELECT
+ 1 AS `id`,
+  1 AS `nm`,
+  1 AS `depart_dest`,
+  1 AS `depart_time`,
+  1 AS `arrive_dest`,
+  1 AS `arrive_time` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary table structure for view `v_last_played`
+--
+
+DROP TABLE IF EXISTS `v_last_played`;
+/*!50001 DROP VIEW IF EXISTS `v_last_played`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `v_last_played` AS SELECT
+ 1 AS `title`,
+  1 AS `listen_date`,
+  1 AS `Name_exp_3` */;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Table structure for table `venue`
+--
+
+DROP TABLE IF EXISTS `venue`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `venue` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `nm` text DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_general_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Final view structure for view `frequency`
+--
+
+/*!50001 DROP VIEW IF EXISTS `frequency`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb3 */;
+/*!50001 SET character_set_results     = utf8mb3 */;
+/*!50001 SET collation_connection      = utf8mb3_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `frequency` AS select `frq`.`frqd` AS `freq_id`,`frq`.`frq` AS `freq_name` from `frq` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_flight`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_flight`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb3 */;
+/*!50001 SET character_set_results     = utf8mb3 */;
+/*!50001 SET collation_connection      = utf8mb3_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`stef`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_flight` AS select 1 AS `id`,1 AS `nm`,1 AS `depart_dest`,1 AS `depart_time`,1 AS `arrive_dest`,1 AS `arrive_time` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `v_last_played`
+--
+
+/*!50001 DROP VIEW IF EXISTS `v_last_played`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8mb3 */;
+/*!50001 SET character_set_results     = utf8mb3 */;
+/*!50001 SET collation_connection      = utf8mb3_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`stef`@`%` SQL SECURITY DEFINER */
+/*!50001 VIEW `v_last_played` AS select 1 AS `title`,1 AS `listen_date`,1 AS `Name_exp_3` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+
+-- Dump completed on 2024-11-07 12:01:56
