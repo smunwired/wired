@@ -30,7 +30,7 @@ def main(argv):
          table = arg
       elif opt in ("-p", "--partition"):
          partition = arg
-   print( 'Database host is "', rootdir)
+   print( 'Database host is "', dbhost)
    print( 'Source directory is "', rootdir)
    print( 'Destination table is "', table)
    print( 'Destination partition is "', partition)
